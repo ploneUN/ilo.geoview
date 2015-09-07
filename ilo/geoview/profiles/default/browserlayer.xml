@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<layers>
+    <layer name="ilo.geoview"
+        interface="ilo.geoview.interfaces.IProductSpecific" />
+</layers>
