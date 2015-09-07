@@ -19,7 +19,7 @@ from plone.app.textfield import RichText
 
 from z3c.relationfield.schema import RelationList, RelationChoice
 from plone.formwidget.contenttree import ObjPathSourceBinder
-from plone.multilingualbehavior.directives import languageindependent
+#from plone.multilingualbehavior.directives import languageindependent
 from collective import dexteritytextindexer
 
 from ilo.geoview import MessageFactory as _
@@ -31,6 +31,11 @@ class Igeoviewfolder(form.Schema, IImageScaleTraversable):
     """
     Geoview Folder
     """
+    content_type = schema.TextLine(
+           title=_(u"Content Type"),
+           required=False,
+        )
+
     pass
 
 alsoProvides(Igeoviewfolder, IFormFieldProvider)
