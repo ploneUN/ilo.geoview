@@ -23,6 +23,9 @@ from plone.formwidget.contenttree import ObjPathSourceBinder
 from collective import dexteritytextindexer
 
 from ilo.geoview import MessageFactory as _
+from zope.app.container.interfaces import IObjectAddedEvent
+from Products.CMFCore.utils import getToolByName
+from plone.i18n.normalizer import idnormalizer
 
 
 # Interface class; used to define content-type schema.
@@ -46,9 +49,6 @@ class Igeoviewfolder(form.Schema, IImageScaleTraversable):
            required=False,
            source = content_types(),
         )
-
-
-
     pass
 
 alsoProvides(Igeoviewfolder, IFormFieldProvider)
