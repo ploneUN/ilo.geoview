@@ -34,6 +34,7 @@ setup(name='ilo.geoview',
 #          'plone.app.multilingual',
 #          'plone.multilingualbehavior',
           'plone.app.versioningbehavior',
+          'ilo.mou'
           # -*- Extra requirements: -*-
       ],
       extras_require={
