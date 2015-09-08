@@ -27,14 +27,27 @@ from ilo.geoview import MessageFactory as _
 
 # Interface class; used to define content-type schema.
 
+class content_types(object):
+    grok.implements(IContextSourceBinder)
+    def __call__(self,context):
+        brains = context.allowedContentTypes()
+        results = []
+        for brain in brains:
+            title = brain.Title()
+            results.append(SimpleTerm(value=title, token=title, title=title))
+        return SimpleVocabulary(results)
+
 class Igeoviewfolder(form.Schema, IImageScaleTraversable):
     """
     Geoview Folder
     """
-    content_type = schema.TextLine(
+    content_type = schema.Choice(
            title=_(u"Content Type"),
            required=False,
+           source = content_types(),
         )
+
+
 
     pass
 
