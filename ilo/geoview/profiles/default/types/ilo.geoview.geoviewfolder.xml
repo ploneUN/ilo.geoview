@@ -4,7 +4,7 @@
    i18n:domain="ilo.geoview" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
   <!-- Basic metadata -->
-  <property name="title" i18n:translate="">geoview folder</property>
+  <property name="title" i18n:translate="">Geoview folder</property>
   <property name="description"
     i18n:translate="">Geoview Folder</property>
   <property name="icon_expr">string:${portal_url}/folder_icon.png</property>
