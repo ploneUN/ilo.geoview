@@ -14,11 +14,88 @@
     Note that we're using Plone 4 macros. Replace them with Plone 3 macros
     if needed.
 </tal:comment>
+      <metal:javascript_head fill-slot="javascript_head_slot">
+            <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+            <script type="text/javascript">
+                  google.load("visualization", "1", {packages:["geochart"]});
+                  var options = {};
+                  var chart1;
+                  var data;
+                  function drawRegionsMap(data_array) {
+                        data = google.visualization.arrayToDataTable(data_array);
+                        
+                        //options['dataMode'] = 'regions';
+                        options.colors = ['#C7D6D8', '#5F91C0'];
+                        
+                        options.dataMode = 'regions';
+                        //options.showZoomOut = true;
+                        //options.zoomOutLabel = 'Zoom Out';
+                        
+                        
+                        //options['showZoomOut'] = true;
+                        //options['zoomOutLabel'] = 'Zoom Out';
+                        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+                        chart1 = chart;
+                        google.visualization.events.addListener(chart, 'regionClick', zoom);
+                        
+                        chart.draw(data, options);
+                        
+                  }function zoom(e){
+                        options['region'] = e['region'];
+                        
+                        chart1.draw(data, options);
+                  }
+                  
+                  
+                  
+                  function show_world() {
+                        options.displayMode = 'regions';
+                        options.region = 'world';
+                        chart1.draw(data, options);
+                  }
+                  
+                  function set_region(){
+                        options.displayMode = 'regions';
+                        options.region = 'world';
+                        chart1.draw(data, options);
+                    }
+            
+                    function set_marker(){
+                        options.displayMode = 'markers';
+                        options.region = 'world';
+                        chart1.draw(data, options);
+                    }
+                    
+                    $(document).ready(function(){
+                        var data_array = [['Country', 'Count']];
+                        $('div.source_elements').each(function(){
+                            var sub_array = [];
+                            sub_array.push($(this).find('.country').html());
+                            sub_array.push(parseInt($(this).find('.population').html().replace(',','')));
+                            //sub_array.push($(this).find('.country').html()+': '+$(this).find('.population').html());
+                            data_array.push(sub_array);
+                        });
+                
+                        google.setOnLoadCallback(drawRegionsMap(data_array));
+                      });
+            </script>
+      </metal:javascript_head>
 
 <metal:main fill-slot="content-core">
   <metal:content-core define-macro="content-core">
+      
+      <div id="regions_div" style="width: auto; height: 400px;"></div>
+      <div style="float:right"><input type='button' onClick='show_world()' value='World View'/></div>
+      <div style="float:right"><input type='button' onClick='set_marker()' value='Marker'/></div>
+      <br/>
+      <div tal:define="pledges view/map_count" tal:condition="pledges" id='source_data' style="display: none">
+      <div tal:repeat="pledge python: pledges" class='source_elements'>
+            <span class="country" tal:content="python: pledge['title']">philippines</span>
+			<span class="population" tal:content="python: pledge['count']">700,000</span>
+      </div>
+    </div>
 
-    <tal:block repeat="widget view/widgets/values">
+    <!--<tal:block repeat="widget view/widgets/values">
         <div class="field" tal:condition="python:widget.__name__ not in ('IDublinCore.title', 'IDublinCore.description', 'title', 'description',)">
             <label tal:content="widget/label" />
             <br />
@@ -41,7 +118,7 @@
         <tal:block define="listing_macro context/folder_listing/macros/listing">
             <metal:use_macro use-macro="listing_macro" />
         </tal:block>
-    </fieldset>
+    </fieldset>-->
 
   </metal:content-core>
 </metal:main>
