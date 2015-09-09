@@ -10,7 +10,7 @@
   <property name="icon_expr">string:${portal_url}/folder_icon.png</property>
   <property name="factory">ilo.geoview.geoviewfolder</property>
   <property name="global_allow">True</property>
-  <property name="filter_content_types">False</property>  
+  <property name="filter_content_types">True</property>  
   <property name="allowed_content_types" purge="False">
     <element value="ilo.mou.mou"/>
   </property>
