@@ -37,7 +37,7 @@ class content_types(object):
         results = []
         for brain in brains:
             title = brain.Title()
-            results.append(SimpleTerm(value=title, token=title, title=title))
+            results.append(SimpleTerm(value=brain.id, token=brain.id, title=title))
         return SimpleVocabulary(results)
 
 class Igeoviewfolder(form.Schema, IImageScaleTraversable):
