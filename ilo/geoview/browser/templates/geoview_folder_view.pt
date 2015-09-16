@@ -30,7 +30,7 @@
                         options.dataMode = 'regions';
                         //options.showZoomOut = true;
                         //options.zoomOutLabel = 'Zoom Out';
-                        
+                        options.region = 'world';
                         
                         //options['showZoomOut'] = true;
                         //options['zoomOutLabel'] = 'Zoom Out';
@@ -54,15 +54,16 @@
                         chart1.draw(data, options);
                   }
                   
-                  function set_region(){
-                        options.displayMode = 'regions';
-                        options.region = 'world';
+                  function set_region(region){
+                        //options.displayMode = 'regions';
+                        options.region = region;
                         chart1.draw(data, options);
                     }
             
                     function set_marker(){
                         options.displayMode = 'markers';
-                        options.region = 'world';
+                        
+                        //options.region = 'world';
                         chart1.draw(data, options);
                     }
                     
@@ -77,6 +78,10 @@
                         });
                 
                         google.setOnLoadCallback(drawRegionsMap(data_array));
+                        
+                        $('select#set-region').change(function(){
+                              set_region($(this).val());
+                        })
                       });
             </script>
       </metal:javascript_head>
@@ -85,8 +90,16 @@
   <metal:content-core define-macro="content-core">
       
       <div id="regions_div" style="width: auto; height: 400px;"></div>
-      <div style="float:right"><input type='button' onClick='show_world()' value='World View'/></div>
+      <!--<div style="float:right"><input type='button' onClick='show_world()' value='World View'/></div>-->
       <div style="float:right"><input type='button' onClick='set_marker()' value='Marker'/></div>
+      <div style="float: right">
+            Set Region:
+            <select id='set-region'>
+                  <option value='world'>World</option>
+                  <option value='035'>Southeast Asia</option>
+            </select>
+            
+      </div>
       <br/>
       <div tal:define="pledges view/map_count" tal:condition="pledges" id='source_data' style="display: none">
       <div tal:repeat="pledge python: pledges" class='source_elements'>
