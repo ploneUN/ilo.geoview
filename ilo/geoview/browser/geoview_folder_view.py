@@ -33,10 +33,15 @@ class Index(dexterity.DisplayForm):
             obj = result._unrestrictedGetObject()
             
             
-            if obj.country not in data:
-                data[obj.country] = 1
+            if obj.sender_country not in data:
+                data[obj.sender_country] = 1
             else:
-                data[obj.country] += 1
+                data[obj.sender_country] += 1
+            
+            if obj.receiving_country not in data:
+                data[obj.receiving_country] = 1
+            else:
+                data[obj.receiving_country] += 1
         
         map_vocabs = self.map_vocabulary()
         
@@ -45,7 +50,8 @@ class Index(dexterity.DisplayForm):
             if ky in data:
                 val = data[ky]
             final.append({'title':map_vocabs[ky],
-                          'count':val})
+                          'count':val,
+                          'code':ky})
         
         
         
