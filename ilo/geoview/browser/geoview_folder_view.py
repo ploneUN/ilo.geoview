@@ -26,10 +26,12 @@ class Index(dexterity.DisplayForm):
     
     def map_count(self):
         results = self.map_contents()
+        map_vocabs = self.map_vocabulary()
         data = {}
         final = []
         for result in results:
             obj = result._unrestrictedGetObject()
+            
             
             if obj.country not in data:
                 data[obj.country] = 1
@@ -37,10 +39,24 @@ class Index(dexterity.DisplayForm):
                 data[obj.country] += 1
         
         map_vocabs = self.map_vocabulary()
-        for ky in data.keys():
-            if ky in map_vocabs:
-                final.append({'title':map_vocabs[ky],
-                              'count':data[ky]})
+        
+        for ky in map_vocabs.keys():
+            val = 0
+            if ky in data:
+                val = data[ky]
+            final.append({'title':map_vocabs[ky],
+                          'count':val})
+        
+        
+        
+        #for ky in data.keys():
+        #    if ky in map_vocabs:
+        #        final.append({'title':map_vocabs[ky],
+        #                      'count':data[ky]})
+        
+            
+        
+        
         return final
     
     def map_vocabulary(self):
