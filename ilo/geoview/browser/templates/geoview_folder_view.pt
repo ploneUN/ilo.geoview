@@ -22,7 +22,22 @@
                   var chart1;
                   var data;
                   function drawRegionsMap(data_array) {
-                        data = google.visualization.arrayToDataTable(data_array);
+                        //data = google.visualization.arrayToDataTable(data_array);
+                        
+                        data = new google.visualization.DataTable();
+                        data.addColumn('string','Country');
+                        data.addColumn('number', 'Count');
+                        data.addColumn({type:'string', role:'tooltip'});
+                        var array = [];
+                        $('div.source_elements').each(function(){
+                            var sub_array = [];
+                            sub_array.push($(this).find('.country').html());
+                            sub_array.push(parseInt($(this).find('.population').html().replace(',','')));
+                            //sub_array.push($(this).find('.country').html()+': '+$(this).find('.population').html());
+                            sub_array.push('Count: '+$(this).find('.population').html());
+                            array.push(sub_array);
+                        });
+                        data.addRows(array);
                         
                         //options['dataMode'] = 'regions';
                         options.colors = ['#C7D6D8', '#5F91C0'];
@@ -49,16 +64,29 @@
                   
                   
                   function show_world() {
+                        
+                        $('div.world').hide();
+                        $('div.sub-region-parent').hide();
                         options.displayMode = 'regions';
                         options.region = 'world';
                         chart1.draw(data, options);
                   }
                   
                   function set_region(region){
+                        $('div.world').show();
+                        $('div.sub-region-parent').show();
+                        $('div.subregion').hide();
+                        
+                        $('div#'+region).show();
                         //options.displayMode = 'regions';
                         options.region = region;
                         chart1.draw(data, options);
                     }
+                    
+                  function set_subregion(region) {
+                        options.region = region;
+                        chart1.draw(data, options);
+                  }
             
                     function set_marker(){
                         options.displayMode = 'markers';
@@ -88,10 +116,60 @@
 
 <metal:main fill-slot="content-core">
   <metal:content-core define-macro="content-core">
-      
+      <div class='world' style="display: none">show: <a href='#' onclick='event.preventDefault(); show_world()'>World</a></div>
+      <div class='show-region'>show region: <a href='#' onclick='event.preventDefault(); set_region("002")'>Africa</a> -
+                                          <a href='#' onclick='event.preventDefault(); set_region("019")'>Americas</a> -
+                                          <a href='#' onclick='event.preventDefault(); set_region("142")'>Asia</a> -
+                                          <a href='#' onclick='event.preventDefault(); set_region("150")'>Europe</a> -
+                                          <a href='#' onclick='event.preventDefault(); set_region("009")'>Oceania</a>
+      </div>
+      <div class="sub-region-parent" style='display: none'>
+            <div class="subregion" id='002'>
+                  show sub-region: 
+                  <a href='#' onclick='event.preventDefault(); set_subregion("015")'>Northern Africa</a> -
+                  <a href='#' onclick='event.preventDefault(); set_subregion("011")'>Western Africa</a> -
+                  <a href='#' onclick='event.preventDefault(); set_subregion("017")'>Middle Africa</a> -
+                  <a href='#' onclick='event.preventDefault(); set_subregion("014")'>Eastern Africa</a> -
+                  <a href='#' onclick='event.preventDefault(); set_subregion("018")'>Southern Africa</a>
+            </div>
+            
+            <div class='subregion' id='019'>
+                  show sub-region: 
+                  <a href='#' onclick='event.preventDefault(); set_subregion("021")'>Northern America</a> -
+                  <a href='#' onclick='event.preventDefault(); set_subregion("029")'>Caribbean</a> -
+                  <a href='#' onclick='event.preventDefault(); set_subregion("013")'>Central America</a> -
+                  <a href='#' onclick='event.preventDefault(); set_subregion("005")'>South America</a>
+            </div>
+            
+            <div class='subregion' id='142'>
+                  show sub-region: 
+                  <a href='#' onclick='event.preventDefault(); set_subregion("143")'>Central Asia</a> -
+                  <a href='#' onclick='event.preventDefault(); set_subregion("030")'>Eastern Asia</a> -
+                  <a href='#' onclick='event.preventDefault(); set_subregion("034")'>Southern Asia</a> -
+                  <a href='#' onclick='event.preventDefault(); set_subregion("035")'>South-Eastern Asia</a> -
+                  <a href='#' onclick='event.preventDefault(); set_subregion("145")'>Western Asia</a>
+            </div>
+            
+            <div class='subregion' id='150'>
+                  show sub-region: 
+                  <a href='#' onclick='event.preventDefault(); set_subregion("154")'>Northern Europe</a> -
+                  <a href='#' onclick='event.preventDefault(); set_subregion("155")'>Western Europe</a> -
+                  <a href='#' onclick='event.preventDefault(); set_subregion("151")'>Eastern Europe</a> -
+                  <a href='#' onclick='event.preventDefault(); set_subregion("039")'>Southern Europe</a>
+            </div>
+            
+            <div class='subregion' id='009'>
+                  show sub-region: 
+                  <a href='#' onclick='event.preventDefault(); set_subregion("053")'>Australia and New Zealand</a> -
+                  <a href='#' onclick='event.preventDefault(); set_subregion("054")'>Melanasia</a> -
+                  <a href='#' onclick='event.preventDefault(); set_subregion("057")'>Micronesia</a> -
+                  <a href='#' onclick='event.preventDefault(); set_subregion("061")'>Polynesia</a>
+            </div>
+            
+      </div>
       <div id="regions_div" style="width: auto; height: 400px;"></div>
       <!--<div style="float:right"><input type='button' onClick='show_world()' value='World View'/></div>-->
-      <div style="float:right"><input type='button' onClick='set_marker()' value='Marker'/></div>
+      <!--<div style="float:right"><input type='button' onClick='set_marker()' value='Marker'/></div>
       <div style="float: right">
             Set Region:
             <select id='set-region'>
@@ -99,8 +177,8 @@
                   <option value='035'>Southeast Asia</option>
             </select>
             
-      </div>
-      <br/>
+      </div>-->
+      
       <div tal:define="pledges view/map_count" tal:condition="pledges" id='source_data' style="display: none">
       <div tal:repeat="pledge python: pledges" class='source_elements'>
             <span class="country" tal:content="python: pledge['title']">philippines</span>
