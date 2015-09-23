@@ -89,6 +89,22 @@ class Index(dexterity.DisplayForm):
             return countries[country]
         return None
     
+    def show_regions(self):
+        context = self.context
+        regions = getUtility(IVocabularyFactory, 'ilo.geoview.subregions').__call__(context)
+        results = []
+        data = {}
+        subregions = context.subregion
+        for subregion in subregions:
+            data[subregion] = ''
+        for region in regions:
+            if region.value in data:
+                data[region.value] = region.title
+        
+        return data
+            
+        
+    
     
     
             
