@@ -95,8 +95,11 @@ class Index(dexterity.DisplayForm):
         results = []
         data = {}
         subregions = context.subregion
+        if context.default_region:
+            data[context.default_region] = ''
         for subregion in subregions:
-            data[subregion] = ''
+            if subregion not in data:
+                data[subregion] = ''
         for region in regions:
             if region.value in data:
                 data[region.value] = region.title
