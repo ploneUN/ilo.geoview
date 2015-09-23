@@ -22,6 +22,7 @@
                   var chart1;
                   var data;
                   var current_url;
+                  
                   function drawRegionsMap(data_array) {
                         //data = google.visualization.arrayToDataTable(data_array);
                         
@@ -48,6 +49,10 @@
                         //options.showZoomOut = true;
                         //options.zoomOutLabel = 'Zoom Out';
                         options.region = 'world';
+                        var default_region = $('#default_region').html();
+                        if (default_region != null) {
+                              options.region = default_region;
+                        }
                         
                         //options['showZoomOut'] = true;
                         //options['zoomOutLabel'] = 'Zoom Out';
@@ -120,16 +125,19 @@
                 
                         google.setOnLoadCallback(drawRegionsMap(data_array));
                         
-                        $('select#set-region').change(function(){
-                              set_region($(this).val());
-                        })
+                        $('.sub-region').click(function(e){
+                              
+                              set_subregion($(this).attr('subregion_code'));
+                        });
+                        
+                        
                       });
             </script>
       </metal:javascript_head>
 
 <metal:main fill-slot="content-core">
   <metal:content-core define-macro="content-core">
-      <div class='world' style="display: none">show: <a href='#' onclick='event.preventDefault(); show_world()'>World</a></div>
+      <!--<div class='world' style="display: none">show: <a href='#' onclick='event.preventDefault(); show_world()'>World</a></div>
       <div class='show-region'>show region: <a href='#' onclick='event.preventDefault(); set_region("002")'>Africa</a> -
                                           <a href='#' onclick='event.preventDefault(); set_region("019")'>Americas</a> -
                                           <a href='#' onclick='event.preventDefault(); set_region("142")'>Asia</a> -
@@ -179,7 +187,16 @@
                   <a href='#' onclick='event.preventDefault(); set_subregion("061")'>Polynesia</a>
             </div>
             
+      </div>-->
+      
+      <div tal:define="data view/show_regions" tal:condition="data">
+            Show Sub-regions:
+            <tal:entry tal:repeat="d python: data.keys()">
+                  <a tal:attributes="href string:#; subregion_code d" onclick="event.preventDefault()" tal:content="python: data[d]" class="sub-region"></a>
+                  <span tal:condition="not: repeat/d/end">&nbsp;-&nbsp;</span>
+            </tal:entry>
       </div>
+      <span tal:content="context/default_region" id="default_region" style="display: none"></span>
       <br/>
       <div id="regions_div" style="width: auto; height: 400px;"></div>
       <!--<div style="float:right"><input type='button' onClick='show_world()' value='World View'/></div>-->
