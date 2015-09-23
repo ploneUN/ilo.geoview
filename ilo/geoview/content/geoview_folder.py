@@ -65,19 +65,19 @@ class Igeoviewfolder(form.Schema, IImageScaleTraversable):
     
     form.widget(subregion=CheckBoxFieldWidget)
     subregion = schema.List(
-        title = _(u"Available Map Views"),
-        required = True,
+        title = _(u"Alternative Map Views"),
+        required = False,
         value_type=schema.Choice(
             vocabulary='ilo.geoview.subregions',
         )
         
     )
     
-    @invariant
-    def validate_regions(self):
-        if self.subregion:
-            if self.default_region not in self.subregion:
-                raise Invalid(_(u"Default map view should belong to the list of selected map views."))
+    #@invariant
+    #def validate_regions(self):
+    #    if self.subregion:
+    #        if self.default_region not in self.subregion:
+    #            raise Invalid(_(u"Default map view should belong to the list of selected map views."))
     pass
 
 alsoProvides(Igeoviewfolder, IFormFieldProvider)
