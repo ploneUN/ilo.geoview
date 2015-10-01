@@ -221,7 +221,7 @@
       </div>-->
       <!--<span tal:content="context/default_region" id="default_region" style="display: none"></span>-->
       
-      <h3 style="text-align: center">Asia and Pacific Region</h3>
+      <h3 style="text-align: center">Asia and the Pacific</h3>
       <br/>
       <div id="canvas">
             <div id="regions_div"></div>
