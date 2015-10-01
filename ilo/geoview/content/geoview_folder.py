@@ -57,21 +57,20 @@ class Igeoviewfolder(form.Schema, IImageScaleTraversable):
            source = content_types(),
         )
     
-    default_region = schema.Choice(
-        title = _(u"Default Map View"),
-        required = True,
-        vocabulary='ilo.geoview.subregions',
-    )
+    #default_region = schema.Choice(
+    #    title = _(u"Default Map View"),
+    #    required = True,
+    #    vocabulary='ilo.geoview.subregions',
+    #)
     
-    form.widget(subregion=CheckBoxFieldWidget)
-    subregion = schema.List(
-        title = _(u"Alternative Map Views"),
-        required = False,
-        value_type=schema.Choice(
-            vocabulary='ilo.geoview.subregions',
-        )
-        
-    )
+    #form.widget(subregion=CheckBoxFieldWidget)
+    #subregion = schema.List(
+    #    title = _(u"Alternative Map Views"),
+    #    required = False,
+    #    value_type=schema.Choice(
+    #        vocabulary='ilo.geoview.subregions',
+    #    )
+    #)
     
     #@invariant
     #def validate_regions(self):
