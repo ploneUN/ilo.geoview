@@ -14,6 +14,24 @@
     Note that we're using Plone 4 macros. Replace them with Plone 3 macros
     if needed.
 </tal:comment>
+      <metal:styleslot fill-slot="style_slot">
+            <style type="text/css">
+                  #canvas{
+                        width: 700px;
+                        height: 400px;
+                        margin-left: 20%;
+                        overflow: hidden;
+                  }
+                  
+                  #regions_div{
+                        left: -530px;
+                        top: -370px;
+                        position: relative;
+                        
+                  }
+            </style>
+      </metal:styleslot>
+
       <metal:javascript_head fill-slot="javascript_head_slot">
             <script type="text/javascript" src="https://www.google.com/jsapi"></script>
             <script type="text/javascript">
@@ -42,17 +60,22 @@
                         });
                         data.addRows(array);
                         
-                        //options['dataMode'] = 'regions';
                         options.colors = ['#C7D6D8', '#5F91C0'];
                         
                         options.dataMode = 'regions';
                         //options.showZoomOut = true;
                         //options.zoomOutLabel = 'Zoom Out';
                         options.region = 'world';
-                        var default_region = $('#default_region').html();
+                        /*var default_region = $('#default_region').html();
                         if (default_region != null) {
                               options.region = default_region;
-                        }
+                        }*/
+                        
+                        //test
+                        
+                        options.width = 1000;
+                        options.height = 900;
+                        options.keepAspectRatio= true;
                         
                         //options['showZoomOut'] = true;
                         //options['zoomOutLabel'] = 'Zoom Out';
@@ -189,16 +212,20 @@
             
       </div>-->
       
-      <div tal:define="data view/show_regions" tal:condition="data">
-            Show Sub-regions:
+      <!--<div tal:define="data view/show_regions" tal:condition="data">
+            Show Regions:
             <tal:entry tal:repeat="d python: data.keys()">
                   <a tal:attributes="href string:#; subregion_code d" onclick="event.preventDefault()" tal:content="python: data[d]" class="sub-region"></a>
                   <span tal:condition="not: repeat/d/end">&nbsp;-&nbsp;</span>
             </tal:entry>
-      </div>
-      <span tal:content="context/default_region" id="default_region" style="display: none"></span>
+      </div>-->
+      <!--<span tal:content="context/default_region" id="default_region" style="display: none"></span>-->
+      
+      <h3 style="text-align: center">Asia and Pacific Region</h3>
       <br/>
-      <div id="regions_div" style="width: auto; height: 400px;"></div>
+      <div id="canvas">
+            <div id="regions_div"></div>
+      </div>
       <!--<div style="float:right"><input type='button' onClick='show_world()' value='World View'/></div>-->
       <!--<div style="float:right"><input type='button' onClick='set_marker()' value='Marker'/></div>
       <div style="float: right">
