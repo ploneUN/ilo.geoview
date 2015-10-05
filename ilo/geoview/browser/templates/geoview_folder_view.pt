@@ -18,8 +18,8 @@
             <style type="text/css">
                   #canvas{
                         position: relative;
-                        width: 700px;
-                        height: 400px;
+                        width: 850px;
+                        height: 550px;
                         margin-left: 10%;
                         overflow: hidden;
                         border: 1px solid;
@@ -28,13 +28,194 @@
                   
                   #regions_div{
                         position: absolute;
-                        left: -530px;
-                        top: -370px;
+                        left: -750px;
+                        top: -420px;
                         
+                        -ms-transform: scale(1,1); /* IE 9 */
+                        -webkit-transform: scale(1,1); /* Safari */
+                        transform: scale(1,1); /* Standard syntax */
                         /*cursor: move;*/
                         
                   }
-                  
+                  #regions_div path:nth-child(48),
+                  #regions_div path:nth-child(774),
+                  #regions_div path:nth-child(777),
+                  #regions_div path:nth-child(448),
+                  #regions_div path:nth-child(462),
+                  #regions_div path:nth-child(461),
+                  #regions_div path:nth-child(704),
+                  #regions_div path:nth-child(776),
+                  #regions_div path:nth-child(6),
+                  #regions_div path:nth-child(775),
+                  #regions_div path:nth-child(456),
+                  #regions_div path:nth-child(717),
+                  #regions_div path:nth-child(166),
+                  #regions_div path:nth-child(168),
+                  #regions_div path:nth-child(5),
+                  #regions_div path:nth-child(429),
+                  #regions_div path:nth-child(697),
+                  #regions_div path:nth-child(240),
+                  #regions_div path:nth-child(719),
+                  #regions_div path:nth-child(33),
+                  #regions_div path:nth-child(665),
+                  #regions_div path:nth-child(252),
+                  #regions_div path:nth-child(332),
+                  #regions_div path:nth-child(199),
+                  #regions_div path:nth-child(699),
+                  #regions_div path:nth-child(167),
+                  #regions_div path:nth-child(674),
+                  #regions_div path:nth-child(705),
+                  #regions_div path:nth-child(235),
+                  #regions_div path:nth-child(234),
+                  #regions_div path:nth-child(232),
+                  #regions_div path:nth-child(444),
+                  #regions_div path:nth-child(465),
+                  #regions_div path:nth-child(466),
+                  #regions_div path:nth-child(213),
+                  #regions_div path:nth-child(338),
+                  #regions_div path:nth-child(552),
+                  #regions_div path:nth-child(662),
+                  #regions_div path:nth-child(645),
+                  #regions_div path:nth-child(650),
+                  #regions_div path:nth-child(658),
+                  #regions_div path:nth-child(636),
+                  #regions_div path:nth-child(649),
+                  #regions_div path:nth-child(634),
+                  #regions_div path:nth-child(622),
+                  #regions_div path:nth-child(643),
+                  #regions_div path:nth-child(638),
+                  #regions_div path:nth-child(635),
+                  #regions_div path:nth-child(741),
+                  #regions_div path:nth-child(716),
+                  #regions_div path:nth-child(261),
+                  #regions_div path:nth-child(571),
+                  #regions_div path:nth-child(641),
+                  #regions_div path:nth-child(628),
+                  #regions_div path:nth-child(647),
+                  #regions_div path:nth-child(617),
+                  #regions_div path:nth-child(621),
+                  #regions_div path:nth-child(583),
+                  #regions_div path:nth-child(544),
+                  #regions_div path:nth-child(548),
+                  #regions_div path:nth-child(655),
+                  #regions_div path:nth-child(605),
+                  #regions_div path:nth-child(594),
+                  #regions_div path:nth-child(610),
+                  #regions_div path:nth-child(604),
+                  #regions_div path:nth-child(574),
+                  #regions_div path:nth-child(624),
+                  #regions_div path:nth-child(555),
+                  #regions_div path:nth-child(663),
+                  #regions_div path:nth-child(648),
+                  #regions_div path:nth-child(626),
+                  #regions_div path:nth-child(38),
+                  #regions_div path:nth-child(34),
+                  #regions_div path:nth-child(706),
+                  #regions_div path:nth-child(263),
+                  #regions_div path:nth-child(440),
+                  #regions_div path:nth-child(170),
+                  #regions_div path:nth-child(695),
+                  #regions_div path:nth-child(331),
+                  #regions_div path:nth-child(341),
+                  #regions_div path:nth-child(226),
+                  #regions_div path:nth-child(711),
+                  #regions_div path:nth-child(450),
+                  #regions_div path:nth-child(31),
+                  #regions_div path:nth-child(454),
+                  #regions_div path:nth-child(696),
+                  #regions_div path:nth-child(233),
+                  #regions_div path:nth-child(330),
+                  #regions_div path:nth-child(445),
+                  #regions_div path:nth-child(238),
+                  #regions_div path:nth-child(237),
+                  #regions_div path:nth-child(236),
+                  #regions_div path:nth-child(533),
+                  #regions_div path:nth-child(333),
+                  #regions_div path:nth-child(339),
+                  #regions_div path:nth-child(337),
+                  #regions_div path:nth-child(335),
+                  #regions_div path:nth-child(32),
+                  #regions_div path:nth-child(449),
+                  #regions_div path:nth-child(718),
+                  #regions_div path:nth-child(446),
+                  #regions_div path:nth-child(539),
+                  #regions_div path:nth-child(540),
+                  #regions_div path:nth-child(771),
+                  #regions_div path:nth-child(3),
+                  #regions_div path:nth-child(447),
+                  #regions_div path:nth-child(28),
+                  #regions_div path:nth-child(418),
+                  #regions_div path:nth-child(416),
+                  #regions_div path:nth-child(417),
+                  #regions_div path:nth-child(239),
+                  #regions_div path:nth-child(250),
+                  #regions_div path:nth-child(348),
+                  #regions_div path:nth-child(347),
+                  #regions_div path:nth-child(346),
+                  #regions_div path:nth-child(344),
+                  #regions_div path:nth-child(345),
+                  #regions_div path:nth-child(49),
+                  #regions_div path:nth-child(529),
+                  #regions_div path:nth-child(694),
+                  #regions_div path:nth-child(351),
+                  #regions_div path:nth-child(441),
+                  #regions_div path:nth-child(443),
+                  #regions_div path:nth-child(535),
+                  #regions_div path:nth-child(251),
+                  #regions_div path:nth-child(678),
+                  #regions_div path:nth-child(10),
+                  #regions_div path:nth-child(214),
+                  #regions_div path:nth-child(169),
+                  #regions_div path:nth-child(656),
+                  #regions_div path:nth-child(216),
+                  #regions_div path:nth-child(30),
+                  #regions_div path:nth-child(469),
+                  #regions_div path:nth-child(534),
+                  #regions_div path:nth-child(531),
+                  #regions_div path:nth-child(442),
+                  #regions_div path:nth-child(231),
+                  #regions_div path:nth-child(532),
+                  #regions_div path:nth-child(468),
+                  #regions_div path:nth-child(528),
+                  #regions_div path:nth-child(215),
+                  #regions_div path:nth-child(219),
+                  #regions_div path:nth-child(242),
+                  #regions_div path:nth-child(253),
+                  #regions_div path:nth-child(400),
+                  #regions_div path:nth-child(254),
+                  #regions_div path:nth-child(255),
+                  #regions_div path:nth-child(404),
+                  #regions_div path:nth-child(230),
+                  #regions_div path:nth-child(229),
+                  #regions_div path:nth-child(241),
+                  #regions_div path:nth-child(676),
+                  #regions_div path:nth-child(677),
+                  #regions_div path:nth-child(491),
+                  #regions_div path:nth-child(25),
+                  #regions_div path:nth-child(675),
+                  #regions_div path:nth-child(223),
+                  #regions_div path:nth-child(224),
+                  #regions_div path:nth-child(222),
+                  #regions_div path:nth-child(220),
+                  #regions_div path:nth-child(221),
+                  #regions_div path:nth-child(218),
+                  #regions_div path:nth-child(257),
+                  #regions_div path:nth-child(259),
+                  #regions_div path:nth-child(481),
+                  #regions_div path:nth-child(475),
+                  #regions_div path:nth-child(260),
+                  #regions_div path:nth-child(256),
+                  #regions_div path:nth-child(258),
+                  #regions_div path:nth-child(249),
+                  #regions_div path:nth-child(470),
+                  #regions_div path:nth-child(264),
+                  #regions_div path:nth-child(479),
+                  #regions_div path:nth-child(415),
+                  #regions_div path:nth-child(318),
+                  #regions_div path:nth-child(321){
+                        display:none;
+                    
+                    } 
             </style>
       </metal:styleslot>
 
@@ -80,8 +261,8 @@
                         
                         //test
                         
-                        options.width = 1000;
-                        options.height = 900;
+                        options.width = 1500;
+                        options.height = 1100;
                         options.keepAspectRatio= true;
                         
                         //options['showZoomOut'] = true;
@@ -164,7 +345,7 @@
                       });
             </script>
             <script type="text/javascript">
-                 $(document).ready(function(){
+                 /*$(document).ready(function(){
                        var obj = {startPositionX:0,startPositionY:0};
                         var scale=1.0;
                         var translate = {x:0,y:0};
@@ -188,7 +369,7 @@
                   });
                   $(document).on("mouseup",function(){
                         $(this).off("mousemove");
-                    });
+                    });*/
                   
                  
                  
