@@ -21,27 +21,34 @@ class Index(dexterity.DisplayForm):
         context= self.context
         catalog = self.catalog
         ctype = context.content_type
-        results = catalog.unrestrictedSearchResults(query={'path':'/'.join(context.getPhysicalPath()), 'depth':1}, portal_type=ctype, review_state='published')
+        path = '/'.join(context.getPhysicalPath())
+        results = catalog.unrestrictedSearchResults(path={'query':path, 'depth':1}, review_state='published')
+        
         return results
     
     def map_count(self):
+        context= self.context
         results = self.map_contents()
         map_vocabs = self.map_vocabulary()
         data = {}
         final = []
+        ctype = context.content_type
+        
         for result in results:
-            obj = result._unrestrictedGetObject()
-            
-            
-            if obj.sender_country not in data:
-                data[obj.sender_country] = 1
-            else:
-                data[obj.sender_country] += 1
-            
-            if obj.receiving_country not in data:
-                data[obj.receiving_country] = 1
-            else:
-                data[obj.receiving_country] += 1
+            if result.portal_type == ctype:
+                obj = result._unrestrictedGetObject()
+                
+                if hasattr(obj, 'sender_country'):
+                    if obj.sender_country not in data:
+                        data[obj.sender_country] = 1
+                    else:
+                        data[obj.sender_country] += 1
+                
+                if hasattr(obj, 'receiving_country'):
+                    if obj.receiving_country not in data:
+                        data[obj.receiving_country] = 1
+                    else:
+                        data[obj.receiving_country] += 1
         
         map_vocabs = self.map_vocabulary()
         
