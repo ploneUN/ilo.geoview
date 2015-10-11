@@ -51,7 +51,7 @@ class Igeoviewfolder(form.Schema, IImageScaleTraversable):
     """
     Geoview Folder
     """
-    content_type = schema.Choice(
+    item_type = schema.Choice(
            title=_(u"Content Type"),
            required=False,
            source = content_types(),
