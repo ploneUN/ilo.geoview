@@ -373,42 +373,7 @@
                         
                       });*/
             </script>
-            <script type="text/javascript">
-                 /*$(document).ready(function(){
-                       var obj = {startPositionX:0,startPositionY:0};
-                        var scale=1.0;
-                        var translate = {x:0,y:0};
-                        $('#canvas').on("mousedown",function(e){
-                            var container = $(this);
-                            var move = $('#regions_div');
-                            obj.startPositionX=e.pageX-translate.x;
-                            obj.startPositionY=e.pageY-translate.y;
-                            $(document).on("mousemove",function(e){
-                                translate.x=e.pageX-obj.startPositionX;
-                                translate.y=e.pageY-obj.startPositionY;
-                                $('#regions_div').css('transform','scale('+scale+') translate('+translate.x+'px, '+translate.y+'px)');
-                            });
-                            
-                        });
-                        
-                        
-                            
-                        
-                  
-                  });
-                  $(document).on("mouseup",function(){
-                        $(this).off("mousemove");
-                    });*/
-                  
-                 
-                 
-                 
-                   
-                  
-                  
-                  
-                 
-            </script>
+            
       </metal:javascript_head>
 
 <metal:main fill-slot="content-core">
