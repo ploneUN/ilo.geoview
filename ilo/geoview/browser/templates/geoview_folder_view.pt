@@ -227,9 +227,9 @@
                   var options = {};
                   var chart1;
                   var data;
-                  var current_url;
+                  var current_url = '';
                   
-                  function drawRegionsMap(data_array) {
+                  function drawRegionsMap() {
                         //data = google.visualization.arrayToDataTable(data_array);
                         
                         data = new google.visualization.DataTable();
@@ -237,15 +237,32 @@
                         data.addColumn('number', 'Count');
                         data.addColumn({type:'string', role:'tooltip'});
                         var array = [];
-                        $('div.source_elements').each(function(){
+                        
+                        
+                        
+                        num_source_elements = document.querySelectorAll('div.source_elements').length;
+                        
+                        for (i=0; i<num_source_elements; i++){
+                              var sub_array = [];
+                              code = document.getElementById('source_data').children[i].children[2].innerHTML;
+                              country = document.getElementById('source_data').children[i].children[0].innerHTML;
+                              population = document.getElementById('source_data').children[i].children[1].innerHTML.replace(',','');
+                              sub_array.push({v:code, f:country});
+                              sub_array.push(parseInt(population));
+                              sub_array.push('Count: '+population);
+                              array.push(sub_array);
+                        }
+                        
+                        
+                        /*$('div.source_elements').each(function(){
                             var sub_array = [];
                             
                             sub_array.push({v:$(this).find('.code').html(), f:$(this).find('.country').html()});
                             sub_array.push(parseInt($(this).find('.population').html().replace(',','')));
-                            //sub_array.push($(this).find('.country').html()+': '+$(this).find('.population').html());
+                            
                             sub_array.push('Count: '+$(this).find('.population').html());
                             array.push(sub_array);
-                        });
+                        });*/
                         data.addRows(array);
                         
                         options.colors = ['#C7D6D8', '#5F91C0'];
@@ -254,19 +271,13 @@
                         //options.showZoomOut = true;
                         //options.zoomOutLabel = 'Zoom Out';
                         options.region = 'world';
-                        /*var default_region = $('#default_region').html();
-                        if (default_region != null) {
-                              options.region = default_region;
-                        }*/
                         
-                        //test
                         
                         options.width = 1500;
                         options.height = 1100;
                         options.keepAspectRatio= true;
                         
-                        //options['showZoomOut'] = true;
-                        //options['zoomOutLabel'] = 'Zoom Out';
+                        
                         var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
                         chart1 = chart;
                         //google.visualization.events.addListener(chart, 'regionClick', zoom);
@@ -286,6 +297,7 @@
                   function country_select(e) {
                         var selectedIdx = chart1.getSelection()[0].row;
                         var country = data.getValue(selectedIdx, 0);
+                        var current_url = document.getElementById("current_url").innerHTML;
                         
                         window.location = current_url+'/mou_list?country='+country;
                   }
@@ -323,7 +335,24 @@
                         chart1.draw(data, options);
                     }
                     
-                    $(document).ready(function(){
+                    
+                    if (document.addEventListener) {
+                        document.addEventListener("DOMContentLoaded", function(){
+                              
+                              google.setOnLoadCallback(drawRegionsMap());
+                        });
+                    }else if (document.attachEvent) {
+                        document.attachEvent("onreadystatechange", function(){
+                              if (document.readyState === "complete"){
+                                    document.detachEvent( "onreadystatechange", arguments.callee );
+                                    
+                                    google.setOnLoadCallback(drawRegionsMap());
+                              }
+                        });
+                    }
+                    
+                    
+                    /*$(document).ready(function(){
                         current_url = $('[current-url]').attr('current-url');
                         var data_array = [['Country', 'Count']];
                         $('div.source_elements').each(function(){
@@ -334,7 +363,7 @@
                             data_array.push(sub_array);
                         });
                 
-                        google.setOnLoadCallback(drawRegionsMap(data_array));
+                        //google.setOnLoadCallback(drawRegionsMap(data_array));
                         
                         $('.sub-region').click(function(e){
                               
@@ -342,7 +371,7 @@
                         });
                         
                         
-                      });
+                      });*/
             </script>
             <script type="text/javascript">
                  /*$(document).ready(function(){
@@ -462,12 +491,12 @@
       </div>-->
       
       <div tal:define="pledges view/map_count" tal:condition="pledges" id='source_data' style="display: none">
-      <div tal:repeat="pledge python: pledges" class='source_elements'>
-            <span class="country" tal:content="python: pledge['title']">philippines</span>
-			<span class="population" tal:content="python: pledge['count']">700,000</span>
-            <span class='code' tal:content="python: pledge['code']"></span>
+            <div tal:repeat="pledge python: pledges" class='source_elements'>
+                  <span class="country" tal:content="python: pledge['title']">philippines</span>
+                  <span class="population" tal:content="python: pledge['count']">700,000</span>
+                  <span class='code' tal:content="python: pledge['code']"></span>
+            </div>
       </div>
-    </div>
 
     <!--<tal:block repeat="widget view/widgets/values">
         <div class="field" tal:condition="python:widget.__name__ not in ('IDublinCore.title', 'IDublinCore.description', 'title', 'description',)">
@@ -493,7 +522,7 @@
             <metal:use_macro use-macro="listing_macro" />
         </tal:block>
     </fieldset>-->
-      <span tal:attributes='current-url python: context.absolute_url()' ></span>
+      <span tal:attributes='current-url python: context.absolute_url()' id="current_url" tal:content="python: context.absolute_url()"></span>
   </metal:content-core>
 </metal:main>
 
