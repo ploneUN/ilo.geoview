@@ -522,7 +522,7 @@
             <metal:use_macro use-macro="listing_macro" />
         </tal:block>
     </fieldset>-->
-      <span tal:attributes='current-url python: context.absolute_url()' id="current_url" tal:content="python: context.absolute_url()"></span>
+      <span tal:attributes='current-url python: context.absolute_url()' id="current_url" tal:content="python: context.absolute_url()" style="display: none"></span>
   </metal:content-core>
 </metal:main>
 
