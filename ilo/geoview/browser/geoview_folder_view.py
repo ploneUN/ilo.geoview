@@ -20,7 +20,7 @@ class Index(dexterity.DisplayForm):
     def map_contents(self):
         context= self.context
         catalog = self.catalog
-        ctype = context.content_type
+        ctype = context.item_type
         path = '/'.join(context.getPhysicalPath())
         results = catalog.unrestrictedSearchResults(path={'query':path, 'depth':1}, review_state='published')
         
@@ -32,7 +32,7 @@ class Index(dexterity.DisplayForm):
         map_vocabs = self.map_vocabulary()
         data = {}
         final = []
-        ctype = context.content_type
+        ctype = context.item_type
         
         for result in results:
             if result.portal_type == ctype:
