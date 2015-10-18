@@ -1,0 +1,8 @@
+<div class="discusion"
+     i18n:domain="collective.disqus">
+
+    <div id="disqus_thread"></div>
+    <!-- Disqus disabled for ILO Geoview due to rendering bug -->
+
+</div>
+
