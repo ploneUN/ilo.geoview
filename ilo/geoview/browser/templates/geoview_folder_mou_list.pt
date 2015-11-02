@@ -22,7 +22,7 @@
     <ul tal:define="contents view/list_mous" tal:condition="contents">
         <li tal:repeat="content contents">
             <bold><a tal:attributes="href python: content['path']" tal:content="python: content['title']"></a></bold>
-            &emsp;
+            &emsp;&mdash;&emsp;
             <span style="font-style: italic" tal:content="python: content['countries']"></span>
         </li>
     </ul>
