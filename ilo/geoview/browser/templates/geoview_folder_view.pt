@@ -244,12 +244,14 @@
                         
                         for (i=0; i<num_source_elements; i++){
                               var sub_array = [];
-                              code = document.getElementById('source_data').children[i].children[2].innerHTML;
+                              code = document.getElementById('source_data').children[i].children[4].innerHTML;
                               country = document.getElementById('source_data').children[i].children[0].innerHTML;
                               population = document.getElementById('source_data').children[i].children[1].innerHTML.replace(',','');
+                              mou = document.getElementById('source_data').children[i].children[2].innerHTML.replace(',','');
+                              sec = document.getElementById('source_data').children[i].children[3].innerHTML.replace(',','');
                               sub_array.push({v:code, f:country});
                               sub_array.push(parseInt(population));
-                              sub_array.push('Count: '+population);
+                              sub_array.push('MOU: '+mou+', SEC: '+sec);
                               array.push(sub_array);
                         }
                         
@@ -459,6 +461,8 @@
             <div tal:repeat="pledge python: pledges" class='source_elements'>
                   <span class="country" tal:content="python: pledge['title']">philippines</span>
                   <span class="population" tal:content="python: pledge['count']">700,000</span>
+                  <span class="mou" tal:content="python: pledge['mou']">700,000</span>
+                  <span class="sec" tal:content="python: pledge['sec']">700,000</span>
                   <span class='code' tal:content="python: pledge['code']"></span>
             </div>
       </div>

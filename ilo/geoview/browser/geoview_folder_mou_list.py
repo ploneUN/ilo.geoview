@@ -25,13 +25,13 @@ class geoview_folder_mou_list(dexterity.DisplayForm):
                     return form['country']
         return None
     
-    def list_mous(self):
+    def list_mous_sec(self, ctype=None):
         context = self.context
         results = []
         
         if self.form_request():
             country = self.form_request()
-            brains = self.catalog.unrestrictedSearchResults(portal_type='ilo.mou.mou', review_state='published')
+            brains = self.catalog.unrestrictedSearchResults(portal_type=ctype, review_state='published')
             for brain in brains:
                 obj = brain._unrestrictedGetObject()
                 if country in [obj.sender_country, obj.receiving_country]:

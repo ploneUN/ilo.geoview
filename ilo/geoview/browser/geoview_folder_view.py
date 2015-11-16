@@ -35,29 +35,49 @@ class Index(dexterity.DisplayForm):
         ctype = context.item_type
         
         for result in results:
-            if result.portal_type == ctype:
-                obj = result._unrestrictedGetObject()
-                
-                if hasattr(obj, 'sender_country'):
-                    if obj.sender_country not in data:
-                        data[obj.sender_country] = 1
-                    else:
-                        data[obj.sender_country] += 1
-                
-                if hasattr(obj, 'receiving_country'):
-                    if obj.receiving_country not in data:
-                        data[obj.receiving_country] = 1
-                    else:
-                        data[obj.receiving_country] += 1
+            if result.portal_type in ctype:
+                if result.portal_type == 'ilo.mou.mou':
+                    obj = result._unrestrictedGetObject()
+                    raw = {}
+                    if hasattr(obj, 'sender_country'):
+                        if obj.sender_country not in data:
+                            data[obj.sender_country] = {'mou':1, 'sec':0}
+                        else:
+                            data[obj.sender_country]['mou'] += 1
+                    
+                    if hasattr(obj, 'receiving_country'):
+                        if obj.receiving_country not in data:
+                            data[obj.receiving_country] = {'mou':1, 'sec':0}
+                        else:
+                            data[obj.receiving_country]['mou'] += 1
+                if result.portal_type == 'ilo.mou.sec':
+                    obj = result._unrestrictedGetObject()
+                    raw = {}
+                    if hasattr(obj, 'sender_country'):
+                        if obj.sender_country not in data:
+                            data[obj.sender_country] = {'mou':0, 'sec':1}
+                        else:
+                            data[obj.sender_country]['sec'] += 1
+                    
+                    if hasattr(obj, 'receiving_country'):
+                        if obj.receiving_country not in data:
+                            data[obj.receiving_country] = {'mou':0, 'sec':1}
+                        else:
+                            data[obj.receiving_country]['sec'] += 1
         
         map_vocabs = self.map_vocabulary()
         
         for ky in map_vocabs.keys():
-            val = 0
+            mou = 0
+            sec = 0
             if ky in data:
-                val = data[ky]
+                mou = data[ky]['mou']
+                sec = data[ky]['sec']
+            
             final.append({'title':map_vocabs[ky],
-                          'count':val,
+                          'mou':mou,
+                          'sec':sec,
+                          'count':mou+sec,
                           'code':ky})
         
         

@@ -19,14 +19,21 @@
   <metal:content-core define-macro="content-core">
 
     <h1>MOUs for <span tal:content="python: view.country_name(view.form_request())"></span></h1>
-    <ul tal:define="contents view/list_mous" tal:condition="contents">
+    <ul tal:define="contents python: view.list_mous_sec('ilo.mou.mou')" tal:condition="contents">
         <li tal:repeat="content contents">
             <bold><a tal:attributes="href python: content['path']" tal:content="python: content['title']"></a></bold>
             &emsp;&mdash;&emsp;
             <span style="font-style: italic" tal:content="python: content['countries']"></span>
         </li>
     </ul>
-
+    <h1>SECs for <span tal:content="python: view.country_name(view.form_request())"></span></h1>
+    <ul tal:define="contents python: view.list_mous_sec('ilo.mou.sec')" tal:condition="contents">
+        <li tal:repeat="content contents">
+            <bold><a tal:attributes="href python: content['path']" tal:content="python: content['title']"></a></bold>
+            &emsp;&mdash;&emsp;
+            <span style="font-style: italic" tal:content="python: content['countries']"></span>
+        </li>
+    </ul>
 
   </metal:content-core>
 </metal:main>
