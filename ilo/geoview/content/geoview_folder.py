@@ -51,11 +51,15 @@ class Igeoviewfolder(form.Schema, IImageScaleTraversable):
     """
     Geoview Folder
     """
-    item_type = schema.Choice(
-           title=_(u"Content Type"),
-           required=False,
-           source = content_types(),
-        )
+
+    form.widget(item_type=CheckBoxFieldWidget)
+    item_type = schema.List(
+        title=u"For Consideration of",
+       required=False,
+        value_type=schema.Choice(
+            source=content_types()
+        ),
+    )
     
     #default_region = schema.Choice(
     #    title = _(u"Default Map View"),
