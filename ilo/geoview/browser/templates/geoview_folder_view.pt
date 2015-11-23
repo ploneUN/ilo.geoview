@@ -251,7 +251,7 @@
                               sec = document.getElementById('source_data').children[i].children[3].innerHTML.replace(',','');
                               sub_array.push({v:code, f:country});
                               sub_array.push(parseInt(population));
-                              sub_array.push('MOU: '+mou+', SEC: '+sec);
+                              sub_array.push('MOU: '+mou+'\nSEC: '+sec);
                               array.push(sub_array);
                         }
                         
