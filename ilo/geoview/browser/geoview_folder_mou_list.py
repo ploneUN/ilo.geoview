@@ -35,10 +35,13 @@ class geoview_folder_mou_list(dexterity.DisplayForm):
             for brain in brains:
                 obj = brain._unrestrictedGetObject()
                 if country in [obj.sender_country, obj.receiving_country]:
+                    countries = self.country_name(obj.sender_country)
+                    if obj.receiving_country:
+                        countries += ', '+self.country_name(obj.receiving_country)
                     results.append({'title':brain.Title,
                                     'path':obj.absolute_url(),
                                     'description':brain.Description,
-                                    'countries':self.country_name(obj.sender_country)+', '+self.country_name(obj.receiving_country)})
+                                    'countries':countries})
         return results
     
     def country_name(self, country):
