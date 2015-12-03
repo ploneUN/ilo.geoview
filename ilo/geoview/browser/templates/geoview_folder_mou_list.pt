@@ -22,7 +22,7 @@
     <ul tal:define="contents python: view.list_mous_sec('ilo.mou.mou')" tal:condition="contents">
         <li tal:repeat="content contents">
             <bold><a tal:attributes="href python: content['path']" tal:content="python: content['title']"></a></bold>
-            &emsp;&mdash;&emsp;
+            &mdash;
             <span style="font-style: italic" tal:content="python: content['countries']"></span>
         </li>
     </ul>
@@ -30,7 +30,7 @@
     <ul tal:define="contents python: view.list_mous_sec('ilo.mou.sec')" tal:condition="contents">
         <li tal:repeat="content contents">
             <bold><a tal:attributes="href python: content['path']" tal:content="python: content['title']"></a></bold>
-            &emsp;&mdash;&emsp;
+            &mdash;
             <span style="font-style: italic" tal:content="python: content['countries']"></span>
         </li>
     </ul>
