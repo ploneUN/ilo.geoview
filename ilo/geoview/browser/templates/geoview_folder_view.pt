@@ -215,7 +215,13 @@
                   #regions_div path:nth-child(321){
                         display:none;
                     
-                    } 
+                    }
+                  
+                  /* for markers mode */
+                  /*#regions_div div:nth-child(1) div:nth-child(1) div:nth-child(1) svg:nth-child(1) g:nth-child(2) g:nth-child(2) g:nth-child(3) g:nth-child(31732),
+                  #regions_div div:nth-child(1) div:nth-child(1) div:nth-child(1) svg:nth-child(1) g:nth-child(2) g:nth-child(2) g:nth-child(3) g:nth-child(13503){
+                        display: none;
+                  }*/
             </style>
       </metal:styleslot>
 
@@ -270,6 +276,7 @@
                         options.colors = ['#C7D6D8', '#5F91C0'];
                         
                         options.dataMode = 'regions';
+                        //options.displayMode = 'markers';
                         //options.showZoomOut = true;
                         //options.zoomOutLabel = 'Zoom Out';
                         options.region = 'world';
@@ -457,13 +464,16 @@
             
       </div>-->
       
-      <div tal:define="pledges view/map_count" tal:condition="pledges" id='source_data' style="display: none">
+      <div tal:define="pledges view/map_count" tal:condition="pledges" id='source_data' style="margin-left: 10%">
             <div tal:repeat="pledge python: pledges" class='source_elements'>
-                  <span class="country" tal:content="python: pledge['title']">philippines</span>
-                  <span class="population" tal:content="python: pledge['count']">700,000</span>
-                  <span class="mou" tal:content="python: pledge['mou']">700,000</span>
-                  <span class="sec" tal:content="python: pledge['sec']">700,000</span>
-                  <span class='code' tal:content="python: pledge['code']"></span>
+                  <span style='display: none' class="country" tal:content="python: pledge['title']">philippines</span>
+                  <span style='display: none' class="population" tal:content="python: pledge['count']">700,000</span>
+                  <span style='display: none' class="mou" tal:content="python: pledge['mou']">700,000</span>
+                  <span style='display: none' class="sec" tal:content="python: pledge['sec']">700,000</span>
+                  <span style='display: none' class='code' tal:content="python: pledge['code']"></span>
+                  <div tal:condition="python: pledge['code'] in ('SG', 'HK') and (pledge['mou'] or pledge['sec'])">
+                        <a tal:attributes="href python: context.absolute_url()+'/mou_list?country='+pledge['code']" tal:content="python: pledge['title']+': MOU: '+str(pledge['mou'])+', SEC: '+str(pledge['sec'])"></a>
+                  </div>
             </div>
       </div>
 
