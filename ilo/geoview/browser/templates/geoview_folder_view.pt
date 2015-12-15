@@ -234,6 +234,7 @@
                   var chart1;
                   var data;
                   var current_url = '';
+                  var view_type = 'regional';
                   
                   function drawRegionsMap() {
                         //data = google.visualization.arrayToDataTable(data_array);
@@ -337,12 +338,33 @@
                         chart1.draw(data, options);
                   }
             
-                    function set_marker(){
-                        options.displayMode = 'markers';
+                    function set_marker(view){
+                        if (view == 'regional' && view != view_type) {
+                              options.displayMode = 'regions';
+                              chart1.draw(data, options);
+                              view_type = 'regional';
+                              document.getElementById('view_regional').style.color = 'black';
+                              document.getElementById('view_regional').style.cursor = 'default';
+                              document.getElementById('view_marker').style.color = '#427597';
+                              document.getElementById('view_marker').style.cursor = 'pointer';
+                              return;
+                        }
+                        if (view == 'markers' && view != view_type) {
+                              options.displayMode = 'markers';
+                              chart1.draw(data, options);
+                              view_type = 'markers';
+                              document.getElementById('view_regional').style.color = '#427597';
+                              document.getElementById('view_regional').style.cursor = 'pointer';
+                              document.getElementById('view_marker').style.color = 'black';
+                              document.getElementById('view_marker').style.cursor = 'default';
+                              return;
+                        }
+                        
                         
                         //options.region = 'world';
-                        chart1.draw(data, options);
+                        
                     }
+                    
                     
                     
                     if (document.addEventListener) {
@@ -453,6 +475,9 @@
       <div id="canvas">
             <div id="regions_div"></div>
       </div>
+      <div style="margin-left: 10%">
+            View Type: <span id="view_regional" onclick="set_marker('regional')">Regional</span>&nbsp;|&nbsp;<span onclick="set_marker('markers')" id="view_marker" style="color: #427597; cursor: pointer">Marker</span>
+      </div>
       <!--<div style="float:right"><input type='button' onClick='show_world()' value='World View'/></div>-->
       <!--<div style="float:right"><input type='button' onClick='set_marker()' value='Marker'/></div>
       <div style="float: right">
@@ -471,9 +496,9 @@
                   <span style='display: none' class="mou" tal:content="python: pledge['mou']">700,000</span>
                   <span style='display: none' class="sec" tal:content="python: pledge['sec']">700,000</span>
                   <span style='display: none' class='code' tal:content="python: pledge['code']"></span>
-                  <div tal:condition="python: pledge['code'] in ('SG', 'HK') and (pledge['mou'] or pledge['sec'])">
+                  <!--<div tal:condition="python: pledge['code'] in ('SG', 'HK') and (pledge['mou'] or pledge['sec'])">
                         <a tal:attributes="href python: context.absolute_url()+'/mou_list?country='+pledge['code']" tal:content="python: pledge['title']+': MOU: '+str(pledge['mou'])+', SEC: '+str(pledge['sec'])"></a>
-                  </div>
+                  </div>-->
             </div>
       </div>
 
