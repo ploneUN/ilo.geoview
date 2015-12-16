@@ -475,9 +475,9 @@
       <div id="canvas">
             <div id="regions_div"></div>
       </div>
-      <div style="margin-left: 10%">
+      <!--<div style="margin-left: 10%">
             View Type: <span id="view_regional" onclick="set_marker('regional')">Regional</span>&nbsp;|&nbsp;<span onclick="set_marker('markers')" id="view_marker" style="color: #427597; cursor: pointer">Marker</span>
-      </div>
+      </div>-->
       <!--<div style="float:right"><input type='button' onClick='show_world()' value='World View'/></div>-->
       <!--<div style="float:right"><input type='button' onClick='set_marker()' value='Marker'/></div>
       <div style="float: right">
@@ -489,6 +489,9 @@
             
       </div>-->
       
+      <div style="margin-left: 10%" tal:condition="view/show_small_countries">
+            Countries not viewable on the map:
+      </div>
       <div tal:define="pledges view/map_count" tal:condition="pledges" id='source_data' style="margin-left: 10%">
             <div tal:repeat="pledge python: pledges" class='source_elements'>
                   <span style='display: none' class="country" tal:content="python: pledge['title']">philippines</span>
@@ -496,9 +499,9 @@
                   <span style='display: none' class="mou" tal:content="python: pledge['mou']">700,000</span>
                   <span style='display: none' class="sec" tal:content="python: pledge['sec']">700,000</span>
                   <span style='display: none' class='code' tal:content="python: pledge['code']"></span>
-                  <!--<div tal:condition="python: pledge['code'] in ('SG', 'HK') and (pledge['mou'] or pledge['sec'])">
+                  <div tal:condition="python: pledge['code'] in ('SG', 'HK') and (pledge['mou'] or pledge['sec'])">
                         <a tal:attributes="href python: context.absolute_url()+'/mou_list?country='+pledge['code']" tal:content="python: pledge['title']+': MOU: '+str(pledge['mou'])+', SEC: '+str(pledge['sec'])"></a>
-                  </div>-->
+                  </div>
             </div>
       </div>
 
