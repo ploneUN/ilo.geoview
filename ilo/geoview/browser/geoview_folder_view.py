@@ -132,6 +132,15 @@ class Index(dexterity.DisplayForm):
                 data[region.value] = region.title
         
         return data
+    
+    def show_small_countries(self):
+        results = self.map_count()
+        if results:
+            for result in results:
+                if (result['code'] in ('SG', 'HK')) and (result['sec'] or result['mou']):
+                    return True
+        return False
+    
             
         
     
